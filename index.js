@@ -42,13 +42,18 @@ function createRock(x) {
   rock.className = 'rock'
   rock.style.left = `${x}px`
 
+<<<<<<< HEAD
   var top = 0;
+=======
+  var top = -100;
+>>>>>>> 03474cdcf07aaab94621a855716c25df2a751417
 
   rock.style.top = top
 
   GAME.appendChild(rock);
 
 
+<<<<<<< HEAD
 function moveRock() {
   if (checkCollision(rock) === true){
     endGame();
@@ -84,6 +89,74 @@ function endGame() {
   START.innerHTML = 'Play again?'
   START.style.display = 'inline'
 }
+=======
+function moveRockBottom() {
+  var rockPosition = gameInterval;
+  var id = setInterval(frame, 10);
+  function frame() {
+    if (rockPosition == 380) {
+      clearInterval(id);
+    } else {
+      rockPosition++;
+      rock.style.top = rockPosition + 'px';
+     // window.requestAnimationFrame(moveRock)
+
+    }
+  }
+  /* var bottomNumbers = rock.style.left.replace('px', ' ')
+  var bottom = parseInt(bottomNumbers, 10)
+  
+ 
+    if (bottom > 0) {
+      rock.style.left = `${bottom + 2}px` 
+      window.requestAnimationFrame(moveRock)
+    } */
+} 
+
+  /**
+   * This function moves the rock. (2 pixels at a time
+   * seems like a good pace.)
+   */
+function moveRock() {
+  if (checkCollision(rock) === true){
+    return endGame()
+  }
+  else if (top < GAME_HEIGHT - 20){
+ top+=4
+ rock.style.top = `${top}px`
+ window.requestAnimationFrame(moveRock);
+  }
+  else if (top >= Game_HEIGHT -20) {
+    GAME.removeChild(rock);
+    ROCKS.shift();
+  }
+}
+    
+  ROCKS.push(rock)
+  return rock
+createRock() 
+
+/**
+ * End the game by clearing `gameInterval`,
+ * removing all ROCKS from the DOM,
+ * and removing the `moveDodger` event listener.
+ * Finally, alert "YOU LOSE!" to the player.
+ */
+
+ function endGame() {
+  while (ROCKS.length > 0){
+    GAME.removeChild(ROCKS[0])
+    ROCKS.shift() 
+    GAME.removeChild(rock)
+  }
+  
+  clearInterval(gameInterval)
+  document.removeEventListener('keydown', moveDodger)
+  window.alert("YOU LOSE!")
+  START.innerHTML= "PLAY AGAIN?"
+} 
+
+>>>>>>> 03474cdcf07aaab94621a855716c25df2a751417
 
 
 function moveDodger(e) { 
@@ -93,7 +166,11 @@ function moveDodger(e) {
     moveDodgerLeft();
   }
   
+<<<<<<< HEAD
   else if (e.which === RIGHT_ARROW) {
+=======
+  if (e.which === RIGHT_ARROW) {
+>>>>>>> 03474cdcf07aaab94621a855716c25df2a751417
     e.stopPropagation();
     e.preventDefault();
     moveDodgerRight();
@@ -105,9 +182,14 @@ function moveDodgerLeft() {
   var leftNumbers = DODGER.style.left.replace('px', ' ') 
   var left = parseInt(leftNumbers, 10)
   
+<<<<<<< HEAD
   if (left >= 2) {
       DODGER.style.left = `${left - 2}px`
       window.requestAnimationFrame(moveDodgerLeft)
+=======
+  if (left >= 0) {
+      DODGER.style.left = `${left - 6}px`
+>>>>>>> 03474cdcf07aaab94621a855716c25df2a751417
   }
 }
 
@@ -116,8 +198,12 @@ function moveDodgerRight() {
   var right = parseInt(rightNumbers, 10)
   
   if (right >= -500 && right < GAME_WIDTH - 40) {
+<<<<<<< HEAD
     DODGER.style.left = `${right + 2}px`
     window.requestAnimationFrame(moveDodgerRight)
+=======
+    DODGER.style.left = `${right + 6}px`
+>>>>>>> 03474cdcf07aaab94621a855716c25df2a751417
   }
 }
 
